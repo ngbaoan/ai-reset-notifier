@@ -128,7 +128,7 @@ function generateHTML(accounts) {
 
     return `
     <tr class="${rowCls}">
-      <td><span class="ai-badge" style="color:${meta.color}">${meta.logo} ${ai}</span></td>
+      <td><span class="ai-badge" style="color:${meta.color}">${meta.logo} </span></td>
       <td class="col-email">${emailDisp}</td>
       <td class="col-status">${statusHtml}</td>
       <td class="col-note">${noteDisp}</td>
