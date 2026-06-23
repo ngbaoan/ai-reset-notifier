@@ -1,1 +1,0 @@
-body{background:#111827;color:#eee;font-family:Arial;margin:16px}.row{display:grid;grid-template-columns:90px 90px 1fr;gap:8px;padding:10px;border-bottom:1px solid #333}.dot{display:inline-block;width:12px;height:12px;background:#22c55e;border-radius:50%}.time{font-family:monospace;color:#f59e0b}@media(min-width:700px){.row{grid-template-columns:180px 120px 1fr}}

@@ -1,1 +1,0 @@
-console.log('AI Reset Monitor V2');
