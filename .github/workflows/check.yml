@@ -1,4 +1,4 @@
-name: Check Reset
+name: Token limit checker
 on:
   schedule:
     - cron: "*/5 * * * *"
