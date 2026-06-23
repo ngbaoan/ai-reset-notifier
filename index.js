@@ -32,9 +32,14 @@ function toVN(date) {
 }
 
 function fmtTime(dateUTC) {
-  const d = toVN(new Date(dateUTC));
-  const hh = String(d.getUTCHours()).padStart(2, '0');
-  const mm = String(d.getUTCMinutes()).padStart(2, '0');
+  const d   = toVN(new Date(dateUTC));
+  const now = nowVN();
+  const hh  = String(d.getUTCHours()).padStart(2, '0');
+  const mm  = String(d.getUTCMinutes()).padStart(2, '0');
+  const sameDay = d.getUTCFullYear() === now.getUTCFullYear()
+               && d.getUTCMonth()    === now.getUTCMonth()
+               && d.getUTCDate()     === now.getUTCDate();
+  if (sameDay) return `${hh}:${mm}`;
   const dd = String(d.getUTCDate()).padStart(2, '0');
   const mo = String(d.getUTCMonth() + 1).padStart(2, '0');
   return `${hh}:${mm} ${dd}/${mo}`;
@@ -128,7 +133,7 @@ function generateHTML(accounts) {
 
     return `
     <tr class="${rowCls}">
-      <td><span class="ai-badge" style="color:${meta.color}">${meta.logo} </span></td>
+	<td><span class="ai-badge" style="color:${meta.color}">${meta.logo} </span></td>
       <td class="col-email">${emailDisp}</td>
       <td class="col-status">${statusHtml}</td>
       <td class="col-note">${noteDisp}</td>
