@@ -240,8 +240,8 @@ async function main() {
       changed = true;
     }
 
-    // T-5 to T+0 → "sắp reset"
-    if (diffMin <= 5 && diffMin > -1 && !state[keySoon]) {
+    // T-5 to T+0 → "sắp reset" (was T-5, too tight for 5-min cron)
+    if (diffMin <= 15 && diffMin > -1 && !state[keySoon]) {
       await sendTelegram(
         `${logo} <b>${ai}</b> — Sắp reset! ⏳\n` +
         `👤 <b>${email}</b>\n` +
@@ -253,8 +253,8 @@ async function main() {
       changed = true;
     }
 
-    // T+0 to T+10 → "đã available"
-    if (diffMin <= 0 && diffMin > -10 && !state[keyAvail]) {
+    // T+0 to T+15 → "đã available" (was T+10, give more slack)
+    if (diffMin <= 0 && diffMin > -15 && !state[keyAvail]) {
       await sendTelegram(
         `${logo} <b>${ai}</b> — Đã available! ✅\n` +
         `👤 <b>${email}</b>\n` +
