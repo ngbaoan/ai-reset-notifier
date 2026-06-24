@@ -227,6 +227,10 @@ async function main() {
     const resetMs = new Date(resetAt).getTime();
     const diffMin = (resetMs - nowUTC) / 60000;
     const logo    = aiEmoji(ai);
+	
+	// 
+	console.log(`  [${email}] diffMin=${diffMin.toFixed(1)} soon=${state[keySoon]} avail=${state[keyAvail]}`);
+
 
     const keySoon  = `${id}_soon`;
     const keyAvail = `${id}_avail`;
