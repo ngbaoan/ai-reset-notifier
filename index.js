@@ -245,22 +245,18 @@ async function main() {
     // T-5 to T+0 → "sắp reset" (was T-5, too tight for 5-min cron)
     if (diffMin <= 15 && diffMin > -1 && !state[keySoon]) {
       await sendTelegram(
-        `${logo} <b>${ai}</b> — Sắp reset! ⏳\n` +
-        `👤 <b>${email}</b>\n` +
-        `⏰ Reset lúc: <b>${fmtTime(resetAt)}</b>\n` +
-        `⏳ Còn ~<b>${Math.max(0, Math.ceil(diffMin))} phút</b>\n` +
+        `${logo} <b>${email}</b> — ⏳ Sắp reset : <b>${fmtTime(resetAt)}</b>\n` +
+        `⏳ Còn ~<b>${Math.max(0, Math.ceil(diffMin))} phút</b> ` +
         (note ? `📝 ${note}` : '')
       );
       state[keySoon] = true;
       changed = true;
     }
 
-    // T+0 to T+15 → "đã available" (was T+10, give more slack)
+    // T+0 to T+15 → "đã available" (was T+15, give more slack)
     if (diffMin <= 0 && diffMin > -15 && !state[keyAvail]) {
       await sendTelegram(
-        `${logo} <b>${ai}</b> — Đã available! ✅\n` +
-        `👤 <b>${email}</b>\n` +
-        `🎉 Token reset lúc <b>${fmtTime(resetAt)}</b>\n` +
+        `${logo} <b>${email}</b> — ✅ ` +'lúc <b>${fmtTime(resetAt)}</b>\n` +
         (note ? `📝 ${note}` : '')
       );
       state[keyAvail] = true;
