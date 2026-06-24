@@ -256,7 +256,7 @@ async function main() {
     // T+0 to T+15 → "đã available" (was T+15, give more slack)
     if (diffMin <= 0 && diffMin > -15 && !state[keyAvail]) {
       await sendTelegram(
-        `${logo} <b>${email}</b> — ✅ ` +'lúc <b>${fmtTime(resetAt)}</b>\n` +
+        `${logo} <b>${email}</b> — ✅ lúc <b>${fmtTime(resetAt)}</b>\n` +
         (note ? `📝 ${note}` : '')
       );
       state[keyAvail] = true;
