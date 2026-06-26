@@ -167,8 +167,8 @@ td{padding:9px 14px;vertical-align:middle}
 .col-note{color:var(--muted);font-size:12px;font-style:italic}
 .badge{display:inline-block;font-size:13px;padding:3px 10px;border-radius:99px;font-weight:600;white-space:nowrap}
 .badge.avail{background:rgba(76,239,150,.15);color:var(--green)}
-.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);font-family:monospace}
-.badge.blocked{background:rgba(255,92,92,.12);color:var(--red)}
+.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);font-family:monospace;animation: pulse 1s infinite}
+.badge.blocked{background:rgba(255,92,92,.12);color:var(--red);animation: pulse 1s infinite}
 .row-waiting{background:rgba(255,191,71,.04)}
 .row-blocked{background:rgba(255,92,92,.04)}
 .footer{text-align:center;margin-top:16px;font-size:11px;color:var(--muted)}
