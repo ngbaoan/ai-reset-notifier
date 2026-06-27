@@ -138,10 +138,10 @@ function generateHTML(accounts) {
     return `
     <tr class="${rowCls}">
       <td class="col-ai"><span style="color:${meta.color};font-size:15px">${meta.logo}</span></td>
+	  <td class="col-task">${taskHtml}</td>
       <td class="col-email">${emailDisp}</td>
       <td class="col-status">${statusHtml}</td>
       <td class="col-note">${noteDisp}</td>
-      <td class="col-task">${taskHtml}</td>
     </tr>`;
   }).join('');
 
