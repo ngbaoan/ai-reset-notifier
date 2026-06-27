@@ -106,10 +106,10 @@ function generateHTML(accounts) {
   });
 
   const rows = sorted.map(acc => {
-    const { ai = 'Other', email = '?', note = '', resetAt, type } = acc;
-    const meta = AI_META[ai] || AI_META.Other;
-    const emailDisp = email.length > 20 ? email.slice(0, 19) + '…' : email;
-    const noteDisp  = (note || '').length > 30 ? note.slice(0, 29) + '…' : (note || '');
+    const { ai = 'Other', email = '?', note = '', resetAt, type, task, taskColor } = acc;
+    const meta      = AI_META[ai] || AI_META.Other;
+    const emailDisp = email.length > 22 ? email.slice(0, 21) + '…' : email;
+    const noteDisp  = (note || '').length > 28 ? note.slice(0, 27) + '…' : (note || '');
 
     let statusHtml, rowCls;
 
@@ -131,12 +131,17 @@ function generateHTML(accounts) {
       }
     }
 
+    const taskHtml = task
+      ? `<span class="task-badge" style="border-color:${taskColor || '#888'};color:${taskColor || '#888'}">${task}</span>`
+      : '';
+
     return `
     <tr class="${rowCls}">
-	<td><span class="ai-badge" style="color:${meta.color}">${meta.logo} </span></td>
+      <td class="col-ai"><span style="color:${meta.color};font-size:15px">${meta.logo}</span></td>
       <td class="col-email">${emailDisp}</td>
       <td class="col-status">${statusHtml}</td>
       <td class="col-note">${noteDisp}</td>
+      <td class="col-task">${taskHtml}</td>
     </tr>`;
   }).join('');
 
@@ -154,21 +159,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .header{text-align:center;margin-bottom:28px}
 .header h1{font-size:26px;font-weight:700;margin-bottom:6px}
 .header .sub{font-size:12px;color:var(--muted)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:680px;margin:0 auto;overflow:hidden}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:720px;margin:0 auto;overflow:hidden}
 table{width:100%;border-collapse:collapse}
-thead th{background:var(--surface2);color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+thead th{background:var(--surface2);color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
 tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:var(--surface2)}
-td{padding:9px 14px;vertical-align:middle}
-.ai-badge{font-weight:700;font-size:13px}
+td{padding:9px 12px;vertical-align:middle}
+.col-ai{width:28px;text-align:center;padding-right:4px}
 .col-email{font-size:13px}
-.col-status{text-align:center}
+.col-status{text-align:center;white-space:nowrap}
 .col-note{color:var(--muted);font-size:12px;font-style:italic}
+.col-task{text-align:center;width:44px}
+.task-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:2.5px solid #888;font-size:11px;font-weight:700}
 .badge{display:inline-block;font-size:13px;padding:3px 10px;border-radius:99px;font-weight:600;white-space:nowrap}
 .badge.avail{background:rgba(76,239,150,.15);color:var(--green)}
-.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);font-family:monospace;animation: pulse 1s infinite}
-.badge.blocked{background:rgba(255,92,92,.12);color:var(--red);animation: pulse 1s infinite}
+.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);font-family:monospace;animation:pulse 1s infinite}
+.badge.blocked{background:rgba(255,92,92,.12);color:var(--red);animation:pulse 1s infinite}
 .row-waiting{background:rgba(255,191,71,.04)}
 .row-blocked{background:rgba(255,92,92,.04)}
 .footer{text-align:center;margin-top:16px;font-size:11px;color:var(--muted)}
@@ -184,7 +191,7 @@ td{padding:9px 14px;vertical-align:middle}
 <div class="card">
   <table>
     <thead>
-      <tr><th>AI</th><th>Account</th><th style="text-align:center">Status</th><th>Note</th></tr>
+      <tr><th style="width:28px"></th><th>Account</th><th style="text-align:center">Status</th><th>Note</th><th style="text-align:center">Task</th></tr>
     </thead>
     <tbody>${rows}</tbody>
   </table>
