@@ -191,7 +191,14 @@ td{padding:9px 12px;vertical-align:middle}
 <div class="card">
   <table>
     <thead>
-      <tr><th style="width:28px"></th><th>Account</th><th style="text-align:center">Status</th><th>Note</th><th style="text-align:center">Task</th></tr>
+		<tr>
+			<th style="width:28px"></th>
+			<th style="text-align:center">Task</th>
+			<th>Account</th>
+			<th style="text-align:center">Status</th>
+			<th>Note</th>
+			
+		</tr>
     </thead>
     <tbody>${rows}</tbody>
   </table>
