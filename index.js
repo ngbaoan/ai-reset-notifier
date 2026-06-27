@@ -165,8 +165,8 @@ thead th{background:var(--surface2);color:var(--muted);font-size:11px;font-weigh
 tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:var(--surface2)}
-td{padding:9px 12px;vertical-align:middle}
-.col-ai{width:28px;text-align:center;padding-right:4px}
+td{padding:5px 5px;vertical-align:middle}
+.col-ai{text-align:center}
 .col-email{font-size:13px}
 .col-status{text-align:center;white-space:nowrap}
 .col-note{color:var(--muted);font-size:12px;font-style:italic}
