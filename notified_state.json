@@ -1,5 +1,5 @@
 {
-  "228562b8-e097-46c6-81f1-37eee1fbca3a_soon": false,
+  "228562b8-e097-46c6-81f1-37eee1fbca3a_soon": true,
   "228562b8-e097-46c6-81f1-37eee1fbca3a_avail": false,
   "228562b8-e097-46c6-81f1-37eee1fbca3a_reset": "2026-06-27T04:30:00.000Z",
   "a932a838-a20b-420c-aa96-45bfaa6d19d0_soon": false,
@@ -11,9 +11,9 @@
   "c1de7984-7082-4d55-b00c-f7ed6bfe4e67_soon": true,
   "c1de7984-7082-4d55-b00c-f7ed6bfe4e67_avail": true,
   "c1de7984-7082-4d55-b00c-f7ed6bfe4e67_reset": "2026-06-24T18:00:00.000Z",
-  "edd35dff-5f9d-43b7-b6cf-e9ae39e5e2c9_soon": true,
-  "edd35dff-5f9d-43b7-b6cf-e9ae39e5e2c9_avail": true,
-  "edd35dff-5f9d-43b7-b6cf-e9ae39e5e2c9_reset": "2026-06-24T18:40:00.000Z",
+  "edd35dff-5f9d-43b7-b6cf-e9ae39e5e2c9_soon": false,
+  "edd35dff-5f9d-43b7-b6cf-e9ae39e5e2c9_avail": false,
+  "edd35dff-5f9d-43b7-b6cf-e9ae39e5e2c9_reset": "2026-06-27T07:50:00.000Z",
   "dc5ac8e9-a936-460c-bdc5-7451eec137ce_soon": true,
   "dc5ac8e9-a936-460c-bdc5-7451eec137ce_avail": true,
   "dc5ac8e9-a936-460c-bdc5-7451eec137ce_reset": "2026-06-24T18:10:00.000Z"
