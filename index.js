@@ -114,19 +114,19 @@ function generateHTML(accounts) {
     let statusHtml, rowCls;
 
     if (!resetAt || type === 'note') {
-      statusHtml = `<span class="badge avail">🟢</span>`;
+      statusHtml = `<span class="badge avail"><span class="badge-icon">🟢</span></span>`;
       rowCls = 'row-avail';
     } else {
       const resetMs = new Date(resetAt).getTime();
       const diffSec = Math.floor((resetMs - nowUTC) / 1000);
       if (diffSec <= 0) {
-        statusHtml = `<span class="badge avail">🟢</span>`;
+        statusHtml = `<span class="badge avail"><span class="badge-icon">🟢</span></span>`;
         rowCls = 'row-avail';
       } else if (diffSec <= 30 * 60) {
-        statusHtml = `<span class="badge waiting countdown" data-ts="${resetMs}">⏳--:--:--</span>`;
+        statusHtml = `<span class="badge waiting countdown" data-ts="${resetMs}"><span class="badge-icon">⏳</span><span class="badge-time">--:--</span></span>`;
         rowCls = 'row-waiting';
       } else {
-        statusHtml = `<span class="badge blocked" data-ts="${resetMs}">🔴 ${fmtTime(resetAt)}</span>`;
+        statusHtml = `<span class="badge blocked"><span class="badge-icon">🔴</span><span class="badge-time">${fmtTime(resetAt)}</span></span>`;
         rowCls = 'row-blocked';
       }
     }
@@ -172,9 +172,12 @@ td{padding:5px 5px;vertical-align:middle}
 .col-note{color:var(--muted);font-size:12px;font-style:italic}
 .col-task{text-align:center;width:44px}
 .task-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:2.5px solid #888;font-size:11px;font-weight:700}
-.badge{display:inline-block;font-size:13px;padding:3px 10px;border-radius:99px;font-weight:600;white-space:nowrap}
-.badge.avail{background:rgba(76,239,150,.15);color:var(--green)}
-.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);font-family:monospace;animation:pulse 1s infinite}
+.badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;padding:4px 10px;border-radius:10px;font-weight:600;white-space:nowrap;line-height:1.3;gap:1px}
+.badge-icon{font-size:16px;line-height:1}
+.badge-time{font-size:11px;font-family:monospace;letter-spacing:.03em}
+.badge.avail{background:rgba(76,239,150,.15);color:var(--green);flex-direction:row;gap:6px}
+.badge.avail .badge-icon{font-size:14px}
+.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);animation:pulse 1s infinite}
 .badge.blocked{background:rgba(255,92,92,.12);color:var(--red);animation:pulse 1s infinite}
 .row-waiting{background:rgba(255,191,71,.04)}
 .row-blocked{background:rgba(255,92,92,.04)}
@@ -211,8 +214,16 @@ td{padding:5px 5px;vertical-align:middle}
 function tick(){
   document.querySelectorAll('.countdown').forEach(el=>{
     const diff=Math.floor((+el.dataset.ts-Date.now())/1000);
-    if(diff<=0){el.textContent='🟢';el.className='badge avail';el.closest('tr').className='row-avail';}
-    else{const h=String(Math.floor(diff/3600)).padStart(2,'0'),m=String(Math.floor(diff%3600/60)).padStart(2,'0'),s=String(diff%60).padStart(2,'0');el.textContent=\`⏳\${h}:\${m}:\${s}\`;}
+    const timeEl=el.querySelector('.badge-time');
+    if(diff<=0){
+      el.innerHTML='<span class="badge-icon">🟢</span>';
+      el.className='badge avail';
+      el.closest('tr').className='row-avail';
+    }else{
+      const m=String(Math.floor(diff/60)).padStart(2,'0');
+      const s=String(diff%60).padStart(2,'0');
+      if(timeEl) timeEl.textContent=m+':'+s;
+    }
   });
 }
 tick();setInterval(tick,1000);
