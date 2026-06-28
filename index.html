@@ -25,9 +25,12 @@ td{padding:5px 5px;vertical-align:middle}
 .col-note{color:var(--muted);font-size:12px;font-style:italic}
 .col-task{text-align:center;width:44px}
 .task-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:2.5px solid #888;font-size:11px;font-weight:700}
-.badge{display:inline-block;font-size:13px;padding:3px 10px;border-radius:99px;font-weight:600;white-space:nowrap}
-.badge.avail{background:rgba(76,239,150,.15);color:var(--green)}
-.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);font-family:monospace;animation:pulse 1s infinite}
+.badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;padding:4px 10px;border-radius:10px;font-weight:600;white-space:nowrap;line-height:1.3;gap:1px}
+.badge-icon{font-size:16px;line-height:1}
+.badge-time{font-size:11px;font-family:monospace;letter-spacing:.03em}
+.badge.avail{background:rgba(76,239,150,.15);color:var(--green);flex-direction:row;gap:6px}
+.badge.avail .badge-icon{font-size:14px}
+.badge.waiting{background:rgba(255,191,71,.15);color:var(--yellow);animation:pulse 1s infinite}
 .badge.blocked{background:rgba(255,92,92,.12);color:var(--red);animation:pulse 1s infinite}
 .row-waiting{background:rgba(255,191,71,.04)}
 .row-blocked{background:rgba(255,92,92,.04)}
@@ -58,49 +61,57 @@ td{padding:5px 5px;vertical-align:middle}
       <td class="col-ai"><span style="color:#cc785c;font-size:15px">◆</span></td>
 	  <td class="col-task"><span class="task-badge" style="border-color:#c084fc;color:#c084fc">2</span></td>
       <td class="col-email">TTBD</td>
-      <td class="col-status"><span class="badge avail">🟢</span></td>
+      <td class="col-status"><span class="badge avail"><span class="badge-icon">🟢</span></span></td>
       <td class="col-note">Analytics</td>
     </tr>
     <tr class="row-avail">
       <td class="col-ai"><span style="color:#cc785c;font-size:15px">◆</span></td>
 	  <td class="col-task"><span class="task-badge" style="border-color:#c084fc;color:#c084fc">89</span></td>
       <td class="col-email">Huong</td>
-      <td class="col-status"><span class="badge avail">🟢</span></td>
+      <td class="col-status"><span class="badge avail"><span class="badge-icon">🟢</span></span></td>
       <td class="col-note">bug Apps Scripts redirect d…</td>
     </tr>
     <tr class="row-avail">
       <td class="col-ai"><span style="color:#cc785c;font-size:15px">◆</span></td>
 	  <td class="col-task"></td>
       <td class="col-email">ngba</td>
-      <td class="col-status"><span class="badge avail">🟢</span></td>
+      <td class="col-status"><span class="badge avail"><span class="badge-icon">🟢</span></span></td>
       <td class="col-note">web AI binh luận + extension</td>
     </tr>
     <tr class="row-avail">
       <td class="col-ai"><span style="color:#cc785c;font-size:15px">◆</span></td>
 	  <td class="col-task"><span class="task-badge" style="border-color:#c084fc;color:#c084fc">99</span></td>
       <td class="col-email">antestgame</td>
-      <td class="col-status"><span class="badge avail">🟢</span></td>
+      <td class="col-status"><span class="badge avail"><span class="badge-icon">🟢</span></span></td>
       <td class="col-note">engine Lottery Speech VIENE…</td>
     </tr>
     <tr class="row-blocked">
       <td class="col-ai"><span style="color:#cc785c;font-size:15px">◆</span></td>
 	  <td class="col-task"></td>
       <td class="col-email">CSTM</td>
-      <td class="col-status"><span class="badge blocked" data-ts="1782623400000">🔴 12:10</span></td>
+      <td class="col-status"><span class="badge blocked"><span class="badge-icon">🔴</span><span class="badge-time">12:10</span></span></td>
       <td class="col-note">full generation video test</td>
     </tr></tbody>
   </table>
 </div>
 <div class="footer">
-  Lần cuối cập nhật: 09:20:22 28/06/2026 (ICT) &nbsp;·&nbsp;
+  Lần cuối cập nhật: 09:25:18 28/06/2026 (ICT) &nbsp;·&nbsp;
   🟢 Available &nbsp;·&nbsp; ⏳ Chờ reset &nbsp;·&nbsp; 🔴 Bị khoá
 </div>
 <script>
 function tick(){
   document.querySelectorAll('.countdown').forEach(el=>{
     const diff=Math.floor((+el.dataset.ts-Date.now())/1000);
-    if(diff<=0){el.textContent='🟢';el.className='badge avail';el.closest('tr').className='row-avail';}
-    else{const h=String(Math.floor(diff/3600)).padStart(2,'0'),m=String(Math.floor(diff%3600/60)).padStart(2,'0'),s=String(diff%60).padStart(2,'0');el.textContent=`⏳${h}:${m}:${s}`;}
+    const timeEl=el.querySelector('.badge-time');
+    if(diff<=0){
+      el.innerHTML='<span class="badge-icon">🟢</span>';
+      el.className='badge avail';
+      el.closest('tr').className='row-avail';
+    }else{
+      const m=String(Math.floor(diff/60)).padStart(2,'0');
+      const s=String(diff%60).padStart(2,'0');
+      if(timeEl) timeEl.textContent=m+':'+s;
+    }
   });
 }
 tick();setInterval(tick,1000);
