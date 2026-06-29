@@ -123,7 +123,7 @@ function generateHTML(accounts) {
         statusHtml = `<span class="badge avail"><span class="badge-icon">🟢</span></span>`;
         rowCls = 'row-avail';
       } else if (diffSec <= 30 * 60) {
-        statusHtml = `<span class="badge waiting countdown" data-ts="${resetMs}"><span class="badge-icon">⏳</span><span class="badge-time">--:--</span></span>`;
+        statusHtml = `<span class="badge waiting countdown" data-ts="${resetMs}"><span class="badge-icon">⏳</span><span class="badge-time">--m--</span></span>`;
         rowCls = 'row-waiting';
       } else {
         statusHtml = `<span class="badge blocked"><span class="badge-icon">🔴</span><span class="badge-time">${fmtTime(resetAt)}</span></span>`;
